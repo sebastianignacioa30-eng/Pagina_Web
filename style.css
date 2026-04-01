@@ -1,29 +1,58 @@
-body {
-    background-color: #f0f2f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-}
+/* Reset básico */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-.card {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fffafb; /* Un rosa muy clarito */
+    color: #333;
+    line-height: 1.6;
     text-align: center;
 }
 
-button {
-    background-color: #007bff;
+header {
+    background-color: #ff85a2; /* Color vibrante de papelería */
     color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+    padding: 40px 20px;
 }
 
-button:hover {
-    background-color: #0056b3;
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.grid-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.producto-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #ffdae0;
+    transition: transform 0.3s;
+}
+
+.producto-card:hover {
+    transform: translateY(-5px);
+}
+
+.btn-insta {
+    display: inline-block;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+footer {
+    margin-top: 50px;
+    font-size: 0.8rem;
+    color: #888;
 }
