@@ -1,55 +1,45 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marba | Papelería y Estampados</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-    <nav>
-        <div class="logo">Marba</div>
-    </nav>
-
-    <header class="hero">
-        <div class="hero-content">
-            <h1>Papelería Creativa</h1>
-            <p>Estampados personalizados con amor desde Coquimbo</p>
-            <a href="https://wa.me/+56946208955" class="btn-cta" target="_blank">Haz tu pedido por WhatsApp</a>
-        </div>
-    </header>
-
-    <section class="container">
+<section class="container" id="servicios">
         <h2 class="section-title">Nuestros Servicios</h2>
         <div class="grid-productos">
-            <div class="card">
-                <div class="card-icon">📚</div>
-                <h3>Papelería</h3>
-                <p>Agendas, planners, stickers y tarjetas de presentación únicas para tu marca.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">👕</div>
-                <h3>Estampados</h3>
-                <p>Poleras, tazas y bolsas con el diseño que tú elijas. Calidad garantizada.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🎁</div>
-                <h3>Regalos</h3>
-                <p>Detalles personalizados para fechas especiales. ¡Sorprende a todos!</p>
-            </div>
+            
+            <a href="#seccion-papeleria" class="card-link">
+                <div class="card">
+                    <div class="card-icon">📚</div>
+                    <h3>Papelería</h3>
+                    <p>Click para ver agendas y stickers.</p>
+                </div>
+            </a>
+
+            <a href="#seccion-estampados" class="card-link">
+                <div class="card">
+                    <div class="card-icon">👕</div>
+                    <h3>Estampados</h3>
+                    <p>Click para ver poleras y tazas.</p>
+                </div>
+            </a>
+
+            <a href="#seccion-regalos" class="card-link">
+                <div class="card">
+                    <div class="card-icon">🎁</div>
+                    <h3>Regalos</h3>
+                    <p>Click para ver detalles especiales.</p>
+                </div>
+            </a>
         </div>
     </section>
 
-    <section class="social-section">
-        <h3>Síguenos en Instagram</h3>
-        <a href="https://www.instagram.com/marba_papeleria_y_estampados_/" target="_blank" class="insta-link">@marba_papeleria_y_estampados_</a>
+    <section id="seccion-papeleria" class="detalle-servicio">
+        <h2>Nuestra Papelería</h2>
+        <p>Diseñamos agendas 2026, planners semanales y stickers resistentes al agua.</p>
+        <div class="galeria-fake"> [Aquí irán las fotos de Marba] </div>
     </section>
 
-    <footer>
-        <p>&copy; 2026 Marba Papelería & Estampados | Coquimbo, Chile</p>
-    </footer>
+    <section id="seccion-estampados" class="detalle-servicio">
+        <h2>Estampados Personalizados</h2>
+        <p>Técnicas de sublimación y vinilo textil para poleras, tazas y bolsas de tela.</p>
+    </section>
 
-</body>
-</html>
+    <section id="seccion-regalos" class="detalle-servicio">
+        <h2>Regalos Únicos</h2>
+        <p>Box de regalo personalizados para cumpleaños y aniversarios en Coquimbo.</p>
+    </section>
