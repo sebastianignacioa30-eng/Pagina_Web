@@ -27,23 +27,18 @@ body {
 }
 
 /* Navegación */
+/* Ajuste general del nav */
 nav {
-    padding: 20px 5%;
-    background: var(--blanco);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    display: flex;
-    justify-content: center;
+    padding: 10px 5%; /* Reducimos el grosor de la barra blanca */
 }
 
 .logo {
-    font-family: 'Pacifico', cursive;
-    font-size: 2.5rem;
-    color: var(--primario);
+    font-size: 2rem; /* Un poco más pequeño para dejar aire */
 }
 
 /* Sección Hero (Cabecera) */
 .hero {
-    background-image: url('hero-marba.jpg'); /* Asegúrate que la extensión sea .jpeg */
+    background-image: url('hero-marba.jpg'); /* Asegúrate que la extensión sea .jpg */
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* Efecto Parallax */
@@ -231,16 +226,41 @@ footer {
 
 /* Responsive para Celulares */
 @media (max-width: 768px) {
-    .hero-flex {
-        flex-direction: column;
+    .hero {
+        min-height: 60vh; /* Bajamos un poco la altura en el celu */
+        padding: 40px 10px; /* Menos espacio interno */
     }
+
+    .hero-flex {
+        flex-direction: column; /* Apilamos los elementos */
+    }
+
     .hero-text-block {
         flex: 0 0 100%;
         text-align: center;
-        padding: 30px;
+        padding: 20px; /* Reducimos el padding para que no tape tanto */
+        margin: 0 10px;
+        border-radius: 15px;
     }
-    .hero-text-block h1 { font-size: 2.5rem; }
-    .hero-image-spacer { display: none; }
+
+    .hero-text-block h1 { 
+        font-size: 1.8rem; /* Título más pequeño para que no se corte */
+        line-height: 1.1; 
+    }
+
+    .hero-text-block p { 
+        font-size: 1rem; /* Párrafo más legible en pantallas chicas */
+        margin-bottom: 15px;
+    }
+
+    .btn-cta {
+        padding: 12px 25px; /* Botón un poco más compacto */
+        font-size: 0.9rem;
+    }
+
+    .hero-image-spacer { 
+        display: none; 
+    }
 }
 
 /* Nueva sección de contacto */
