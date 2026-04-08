@@ -38,7 +38,7 @@ nav {
 .hero {
     /* Combinamos un degradado oscuro con tu foto para buen contraste */
     background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%), 
-                url('hero-marba.jpg'); /* Tu nueva foto espectacular */
+                url('hero-marba.jpeg'); /* Tu nueva foto espectacular */
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* Efecto Parallax muy pro al hacer scroll */
