@@ -34,32 +34,68 @@ nav {
     color: var(--primario);
 }
 
-/* Busca .hero y cámbialo por esto */
+/* Busca .hero y reemplázalo por esto */
 .hero {
-    /* Combinamos un degradado oscuro con tu foto para buen contraste */
-    background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%), 
-                url('hero-marba.jpeg'); /* Tu nueva foto espectacular */
+    background-image: url('hero-marba.jpg'); /* Tu foto espectacular */
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Efecto Parallax muy pro al hacer scroll */
-    padding: 160px 20px; /* Más espacio arriba y abajo */
-    text-align: center;
-    color: white; /* Texto blanco siempre */
+    background-attachment: fixed; /* Efecto Parallax pro */
+    min-height: 80vh; /* Que ocupe casi toda la pantalla */
+    display: flex;
+    align-items: center; /* Centrado vertical */
+    color: white;
 }
 
-/* Mejora el título y párrafo del hero */
-.hero h1 { 
-    font-size: 3.8rem; 
-    text-shadow: 2px 2px 15px rgba(0,0,0,0.6); 
-    margin-bottom: 10px;
-    letter-spacing: -1px; /* Toque moderno */
+/* Nuevo contenedor Flex */
+.hero-flex {
+    display: flex;
+    justify-content: space-between; /* Texto a la izquierda, espacio a la derecha */
+    align-items: center;
+    width: 100%;
 }
 
-.hero p { 
-    font-size: 1.6rem; 
-    text-shadow: 1px 1px 10px rgba(0,0,0,0.6);
-    color: #e0e0e0; /* Un blanco más suave */
+/* Bloque de texto alineado a la izquierda */
+.hero-text-block {
+    flex: 0 0 45%; /* Ocupa el 45% del ancho */
+    text-align: left; /* Texto a la izquierda */
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro para legibilidad */
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px); /* Efecto desenfoque moderno */
 }
+
+/* Ajustes de texto */
+.hero-text-block h1 {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.hero-text-block p {
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+    color: #e0e0e0;
+}
+
+/* Espaciador para celulares (importante para que no se rompa) */
+.hero-image-spacer {
+    flex: 0 0 50%;
+}
+
+/* Responsive para celulares */
+@media (max-width: 768px) {
+    .hero-flex {
+        flex-direction: column; /* Texto arriba, imagen abajo en celular */
+    }
+    .hero-text-block {
+        flex: 0 0 100%;
+        text-align: center;
+        padding: 30px;
+    }
+    .hero-text-block h1 { font-size: 2.5rem; }
+    .hero-image-spacer { display: none; } /* Ocultamos el espacio en celular */
+}
+
 .btn-cta {
     display: inline-block;
     background-color: #25d366;
