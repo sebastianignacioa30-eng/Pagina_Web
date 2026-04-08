@@ -34,18 +34,32 @@ nav {
     color: var(--primario);
 }
 
-/* Cabecera (Hero) */
+/* Busca .hero y cámbialo por esto */
 .hero {
-    background: linear-gradient(rgba(255, 107, 129, 0.1), rgba(248, 165, 194, 0.2)), 
-                url('https://images.unsplash.com/photo-1583508915901-b5f84c1dcde1?auto=format&fit=crop&q=80&w=1000');
+    /* Combinamos un degradado oscuro con tu foto para buen contraste */
+    background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%), 
+                url('hero-marba.jpg'); /* Tu nueva foto espectacular */
     background-size: cover;
     background-position: center;
-    padding: 120px 20px;
+    background-attachment: fixed; /* Efecto Parallax muy pro al hacer scroll */
+    padding: 160px 20px; /* Más espacio arriba y abajo */
     text-align: center;
+    color: white; /* Texto blanco siempre */
 }
 
-.hero h1 { font-size: 3.5rem; margin-bottom: 10px; color: var(--oscuro); }
+/* Mejora el título y párrafo del hero */
+.hero h1 { 
+    font-size: 3.8rem; 
+    text-shadow: 2px 2px 15px rgba(0,0,0,0.6); 
+    margin-bottom: 10px;
+    letter-spacing: -1px; /* Toque moderno */
+}
 
+.hero p { 
+    font-size: 1.6rem; 
+    text-shadow: 1px 1px 10px rgba(0,0,0,0.6);
+    color: #e0e0e0; /* Un blanco más suave */
+}
 .btn-cta {
     display: inline-block;
     background-color: #25d366;
