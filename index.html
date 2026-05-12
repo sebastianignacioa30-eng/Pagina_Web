@@ -83,11 +83,12 @@
     /* ─── HERO ─── */
     .hero {
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
+      text-align: center;
       padding: 8rem 2.5rem 4rem;
-      gap: 3rem;
       position: relative;
       overflow: hidden;
     }
@@ -114,7 +115,7 @@
       pointer-events: none;
     }
 
-    .hero-text { position: relative; z-index: 1; }
+    .hero-text { position: relative; z-index: 1; max-width: 680px; }
 
     .hero-tag {
       display: inline-block;
@@ -149,8 +150,8 @@
       font-size: 1.05rem;
       color: var(--text-md);
       line-height: 1.7;
-      max-width: 420px;
-      margin-bottom: 2.2rem;
+      max-width: 480px;
+      margin: 0 auto 2.2rem;
       font-weight: 300;
       animation: fadeUp 0.6s 0.2s ease both;
     }
@@ -159,6 +160,7 @@
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
+      justify-content: center;
       animation: fadeUp 0.6s 0.3s ease both;
     }
 
@@ -560,7 +562,7 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-text">
-      <span class="hero-tag">✦ Diseños únicos desde Santiago</span>
+      <span class="hero-tag">✦ Diseños únicos desde Coquimbo</span>
       <h1>Papelería y estampados<br><em>con amor</em></h1>
       <p class="hero-desc">
         Creamos diseños personalizados para hacer cada momento especial — agendas, stickers, poleras, regalos y mucho más. Para todo Chile.
@@ -575,31 +577,7 @@
       </div>
     </div>
 
-    <div class="hero-visual">
-      <div class="hero-card-grid">
-        <div class="hero-card">
-          <div class="hero-card-inner">
-            <div class="hero-card-icon">📓</div>
-            <span>Agendas</span>
-            <span class="hero-card-label">Personalizadas</span>
-          </div>
-        </div>
-        <div class="hero-card">
-          <div class="hero-card-inner">
-            <div class="hero-card-icon">👕</div>
-            <span>Poleras</span>
-            <span class="hero-card-label">Estampados</span>
-          </div>
-        </div>
-        <div class="hero-card">
-          <div class="hero-card-inner">
-            <div class="hero-card-icon">🎁</div>
-            <span>Regalos</span>
-            <span class="hero-card-label">Con detalle</span>
-          </div>
-        </div>
-      </div>
-    </div>
+
   </section>
 
   <!-- SERVICIOS -->
@@ -682,7 +660,6 @@
   <!-- FOOTER -->
   <footer>
     © 2026 <strong style="color: rgba(251,246,239,0.9)">Marba Papelería & Estampados</strong> — Santiago, Chile<br>
-
   </footer>
 
 </body>
