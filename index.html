@@ -1,87 +1,689 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marba | Papelería y Estampados</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marba | Papelería y Estampados</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rosa:     #F4C2C2;
+      --rosa-md:  #E8939A;
+      --rosa-dk:  #C0556D;
+      --crema:    #FBF6EF;
+      --crema-dk: #F2E8D6;
+      --cafe:     #6B4C3B;
+      --cafe-lt:  #A07860;
+      --verde:    #8BAF8B;
+      --verde-lt: #C4D9C4;
+      --text:     #2E1A12;
+      --text-md:  #7A5C50;
+      --white:    #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--crema);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(251, 246, 239, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(107, 76, 59, 0.12);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--cafe);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-md);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--cafe); }
+
+    .nav-cta {
+      background: var(--cafe);
+      color: var(--white) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 100px;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--rosa-dk) !important; color: var(--white) !important; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 2.5rem 4rem;
+      gap: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--rosa) 0%, transparent 70%);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: 5%;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--verde-lt) 0%, transparent 70%);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .hero-text { position: relative; z-index: 1; }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--rosa-dk);
+      background: var(--crema-dk);
+      border: 1px solid var(--rosa-md);
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      line-height: 1.12;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--rosa-dk);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text-md);
+      line-height: 1.7;
+      max-width: 420px;
+      margin-bottom: 2.2rem;
+      font-weight: 300;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--cafe);
+      color: var(--white);
+      padding: 0.85rem 1.8rem;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .btn-primary:hover { background: var(--rosa-dk); transform: translateY(-2px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--cafe);
+      padding: 0.85rem 1.8rem;
+      border-radius: 100px;
+      border: 1.5px solid var(--cafe-lt);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .btn-secondary:hover { border-color: var(--cafe); transform: translateY(-2px); }
+
+    /* Hero illustration area */
+    .hero-visual {
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 0.8s 0.2s ease both;
+    }
+
+    .hero-card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .hero-card {
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      position: relative;
+    }
+
+    .hero-card:first-child {
+      grid-column: 1 / 2;
+      grid-row: 1 / 3;
+      aspect-ratio: auto;
+      min-height: 340px;
+    }
+
+    .hero-card-inner {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      text-align: center;
+      gap: 0.5rem;
+    }
+
+    .hero-card:nth-child(1) .hero-card-inner { background: var(--rosa); }
+    .hero-card:nth-child(2) .hero-card-inner { background: var(--verde-lt); }
+    .hero-card:nth-child(3) .hero-card-inner { background: var(--crema-dk); }
+
+    .hero-card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-card-label {
+      font-size: 0.8rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--cafe);
+      margin-top: 0.3rem;
+    }
+
+    /* ─── SERVICIOS ─── */
+    .section {
+      padding: 6rem 2.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .section-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cafe-lt);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.2;
+      color: var(--text);
+    }
+
+    .section-title em { font-style: italic; color: var(--rosa-dk); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      text-decoration: none;
+      color: inherit;
+      border: 1.5px solid transparent;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--card-accent, var(--rosa));
+      border-radius: 4px 4px 0 0;
+    }
+
+    .service-card:nth-child(1) { --card-accent: var(--rosa-md); }
+    .service-card:nth-child(2) { --card-accent: var(--verde); }
+    .service-card:nth-child(3) { --card-accent: var(--cafe-lt); }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--crema-dk);
+      box-shadow: 0 12px 40px rgba(107, 76, 59, 0.1);
+    }
+
+    .service-icon {
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      background: var(--icon-bg, var(--crema-dk));
+    }
+
+    .service-card:nth-child(1) .service-icon { background: #FCEAEA; }
+    .service-card:nth-child(2) .service-icon { background: var(--verde-lt); }
+    .service-card:nth-child(3) .service-icon { background: var(--crema-dk); }
+
+    .service-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--text);
+    }
+
+    .service-desc {
+      font-size: 0.9rem;
+      color: var(--text-md);
+      line-height: 1.65;
+      font-weight: 300;
+      flex: 1;
+    }
+
+    .service-link {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--cafe);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .service-link::after {
+      content: '→';
+      transition: transform 0.2s;
+    }
+
+    .service-card:hover .service-link::after { transform: translateX(4px); }
+
+    /* ─── BANNER ─── */
+    .banner {
+      margin: 0 2.5rem;
+      border-radius: 28px;
+      background: var(--cafe);
+      padding: 4rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: 100px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(244, 194, 194, 0.15);
+    }
+
+    .banner-text { position: relative; z-index: 1; }
+
+    .banner-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--rosa);
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+    }
+
+    .banner-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+      color: var(--white);
+      line-height: 1.25;
+    }
+
+    .banner-title em { font-style: italic; color: var(--rosa); }
+
+    .banner-sub {
+      font-size: 0.9rem;
+      color: rgba(251, 246, 239, 0.7);
+      margin-top: 0.8rem;
+      font-weight: 300;
+    }
+
+    .btn-light {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--white);
+      color: var(--cafe);
+      padding: 0.9rem 2rem;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: transform 0.2s, background 0.2s;
+      white-space: nowrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-light:hover { background: var(--rosa); transform: translateY(-2px); }
+
+    /* ─── CONTACTO ─── */
+    .contact-section {
+      padding: 6rem 2.5rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .contact-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      text-decoration: none;
+      color: inherit;
+      border: 1.5px solid transparent;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--crema-dk);
+    }
+
+    .contact-icon {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--crema-dk);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .contact-info { flex: 1; }
+
+    .contact-platform {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cafe-lt);
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-value {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--text);
+      color: rgba(251, 246, 239, 0.6);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+    }
+
+    footer a { color: var(--rosa); text-decoration: none; }
+
+    /* ─── ANIMACIONES ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding-top: 6rem; }
+      .hero-visual { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .banner { margin: 0 1.5rem; padding: 2.5rem; }
+      .nav-links { display: none; }
+      nav { padding: 1rem 1.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      .section { padding: 4rem 1.5rem; }
+      .hero { padding: 6rem 1.5rem 3rem; }
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-secondary { text-align: center; justify-content: center; }
+    }
+  </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">Marba Papelerías</div>
-    </nav>
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">Marba</a>
+    <ul class="nav-links">
+      <li><a href="papeleria.html">Papelería</a></li>
+      <li><a href="estampados.html">Estampados</a></li>
+      <li><a href="regalos.html">Regalos</a></li>
+      <li><a href="https://wa.me/56946208955" class="nav-cta">Cotizar</a></li>
+    </ul>
+  </nav>
 
-    <header class="hero">
-        <div class="container hero-flex">
-            <div class="hero-text-block">
-                <h1>Papelería y Estampados con Amor</h1>
-                <p>Diseños personalizados únicos desde Coquimbo para todo Chile.</p>
-                <a href="https://wa.me/56946208955" class="btn-cta" target="_blank">Cotiza por WhatsApp</a>
-            </div>
-            <div class="hero-image-spacer"></div>
-        </div>
-    </header>
-
-    <main class="container" id="servicios">
-        <h2 class="section-title">Nuestros Servicios</h2>
-        <div class="grid-productos">
-            <a href="papeleria.html" class="card-link">
-                <div class="card">
-                    <div class="card-img-container">
-                        <img src="papeleria-img.jpg" alt="Papelería Marba">
-                    </div>
-                    <h3>Papelería</h3>
-                    <p>Ver catálogo de agendas y stickers</p>
-                </div>
-            </a>
-
-            <a href="estampados.html" class="card-link">
-                <div class="card">
-                    <div class="card-img-container">
-                        <img src="estampados-img.jpg" alt="Estampados Marba">
-                    </div>
-                    <h3>Estampados</h3>
-                    <p>Ver opciones de poleras y tazas</p>
-                </div>
-            </a>
-
-            <a href="regalos.html" class="card-link">
-                <div class="card">
-                    <div class="card-img-container">
-                        <img src="regalos-img.jpg" alt="Regalos Marba">
-                    </div>
-                    <h3>Regalos</h3>
-                    <p>Ver cajas y detalles personalizados</p>
-                </div>
-            </a>
-        </div>
-    </main>
-
-   <section class="contacto-section">
-    <div class="container">
-        <h2 class="section-title" style="color: white; margin-bottom: 30px;">Contacto</h2>
-        <div class="contacto-grid">
-            <div class="contacto-item">
-                <span class="contacto-icon">📸</span>
-                <h3>Instagram</h3>
-                <a href="https://www.instagram.com/marba_papeleria_y_estampados_/" target="_blank" class="contacto-link">@marba_papeleria_y_estampados_</a>
-            </div>
-            <div class="contacto-item">
-                <span class="contacto-icon">💬</span>
-                <h3>WhatsApp</h3>
-                <a href="https://wa.me/56946208955" target="_blank" class="contacto-link">+569 4620 8955</a>
-            </div>
-            <div class="contacto-item">
-                <span class="contacto-icon">✉️</span>
-                <h3>Correo</h3>
-                <a href="mailto:marba.papeleria.estampados@gmail.com" class="contacto-link">marba.papeleria.estampados@gmail.com</a>
-            </div>
-        </div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-tag">✦ Diseños únicos desde Coquimbo</span>
+      <h1>Papelería y estampados<br><em>con amor</em></h1>
+      <p class="hero-desc">
+        Creamos diseños personalizados para hacer cada momento especial — agendas, stickers, poleras, regalos y mucho más. Para todo Chile.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="https://wa.me/56946208955">
+          💬 Cotiza por WhatsApp
+        </a>
+        <a class="btn-secondary" href="#servicios">
+          Ver catálogo
+        </a>
+      </div>
     </div>
-</section>
-<footer>
-    <p>&copy; 2026 Marba Papelería & Estampados | Santiago, Chile</p>
-</footer>
+
+    <div class="hero-visual">
+      <div class="hero-card-grid">
+        <div class="hero-card">
+          <div class="hero-card-inner">
+            <div class="hero-card-icon">📓</div>
+            <span>Agendas</span>
+            <span class="hero-card-label">Personalizadas</span>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-inner">
+            <div class="hero-card-icon">👕</div>
+            <span>Poleras</span>
+            <span class="hero-card-label">Estampados</span>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-inner">
+            <div class="hero-card-icon">🎁</div>
+            <span>Regalos</span>
+            <span class="hero-card-label">Con detalle</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="section" id="servicios">
+    <div class="section-header">
+      <div>
+        <p class="section-tag">Lo que ofrecemos</p>
+        <h2 class="section-title">Nuestros <em>servicios</em></h2>
+      </div>
+    </div>
+
+    <div class="services-grid">
+      <a href="papeleria.html" class="service-card">
+        <div class="service-icon">📚</div>
+        <h3 class="service-name">Papelería</h3>
+        <p class="service-desc">Agendas, stickers, libretas y productos de papelería con diseños únicos hechos especialmente para ti.</p>
+        <span class="service-link">Ver catálogo</span>
+      </a>
+
+      <a href="estampados.html" class="service-card">
+        <div class="service-icon">🎨</div>
+        <h3 class="service-name">Estampados</h3>
+        <p class="service-desc">Poleras, tazas y otros productos con estampados personalizados. Perfectos para regalar o para ti mismo.</p>
+        <span class="service-link">Ver opciones</span>
+      </a>
+
+      <a href="regalos.html" class="service-card">
+        <div class="service-icon">🎀</div>
+        <h3 class="service-name">Regalos</h3>
+        <p class="service-desc">Cajas y detalles personalizados para cumpleaños, matrimonios, baby showers y toda ocasión especial.</p>
+        <span class="service-link">Ver detalles</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- BANNER CTA -->
+  <div class="banner">
+    <div class="banner-text">
+      <p class="banner-label">¿Tienes algo en mente?</p>
+      <h2 class="banner-title">Cuéntanos tu idea<br>y la hacemos <em>realidad</em></h2>
+      <p class="banner-sub">Respondemos rápido — tiempo de respuesta menor a 24 horas.</p>
+    </div>
+    <a href="https://wa.me/56946208955" class="btn-light">💬 Escribir por WhatsApp</a>
+  </div>
+
+  <!-- CONTACTO -->
+  <section class="contact-section" id="contacto">
+    <div>
+      <p class="section-tag">Encuéntranos</p>
+      <h2 class="section-title">¿Tienes <em>preguntas</em>?</h2>
+    </div>
+
+    <div class="contact-grid">
+      <a href="https://www.instagram.com/marba_papeleria_y_estampados_/" target="_blank" class="contact-card">
+        <div class="contact-icon">📸</div>
+        <div class="contact-info">
+          <p class="contact-platform">Instagram</p>
+          <p class="contact-value">@marba_papeleria_y_estampados_</p>
+        </div>
+      </a>
+
+      <a href="https://wa.me/56946208955" target="_blank" class="contact-card">
+        <div class="contact-icon">💬</div>
+        <div class="contact-info">
+          <p class="contact-platform">WhatsApp</p>
+          <p class="contact-value">+569 4620 8955</p>
+        </div>
+      </a>
+
+      <a href="mailto:marba.papeleria.estampados@gmail.com" class="contact-card">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-info">
+          <p class="contact-platform">Correo</p>
+          <p class="contact-value">marba.papeleria.estampados@gmail.com</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 <strong style="color: rgba(251,246,239,0.9)">Marba Papelería & Estampados</strong> — Santiago, Chile<br>
+
+  </footer>
+
+</body>
+</html>
