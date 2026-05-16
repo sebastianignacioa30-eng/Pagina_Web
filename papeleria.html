@@ -5,51 +5,306 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Papelería | Marba</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; background: #fcfcfc; color: #2f3542; overflow-x: hidden; }
+
+        /* NAV igual al index */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 10px 5%;
+            background: rgba(253,251,252,0.93);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255,107,129,0.1);
+            box-shadow: 0 2px 16px rgba(255,107,129,0.06);
+        }
+        .logo {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.9rem;
+            background: linear-gradient(135deg, #ff6b81, #c44560);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+        .nav-links a {
+            font-size: 0.78rem; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: #888; text-decoration: none;
+            transition: color 0.2s; position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: #ff6b81;
+            border-radius: 2px; transition: width 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: #ff6b81; }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-wa {
+            background: linear-gradient(135deg, #25D366, #128C7E) !important;
+            color: white !important; padding: 0.5rem 1.2rem;
+            border-radius: 50px; font-size: 0.75rem !important;
+            box-shadow: 0 4px 14px rgba(37,211,102,0.3);
+        }
+        .nav-wa::after { display: none !important; }
+
+        /* HERO de página interna */
+        .page-hero {
+            padding: 100px 5% 40px;
+            background: linear-gradient(160deg, #fde8ef 0%, #fff5f7 50%, #fcfcfc 100%);
+            border-bottom: 1px solid #fad4dc;
+            text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute; top: -60px; right: -60px;
+            width: 280px; height: 280px; border-radius: 50%;
+            background: radial-gradient(circle, #f8a5c2, transparent 70%);
+            opacity: 0.3;
+        }
+        .page-hero::after {
+            content: '';
+            position: absolute; bottom: -40px; left: -40px;
+            width: 180px; height: 180px; border-radius: 50%;
+            background: radial-gradient(circle, #ff6b81, transparent 70%);
+            opacity: 0.12;
+        }
+        .breadcrumb {
+            font-size: 0.7rem; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: #bbb; margin-bottom: 12px;
+            position: relative; z-index: 1;
+        }
+        .breadcrumb a { color: #ff6b81; text-decoration: none; }
+        .page-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 700; color: #2f3542;
+            margin-bottom: 10px;
+            position: relative; z-index: 1;
+        }
+        .page-hero h1 span { color: #ff6b81; }
+        .page-hero p {
+            font-size: 1rem; color: #999; font-weight: 300;
+            max-width: 440px; margin: 0 auto;
+            line-height: 1.7; position: relative; z-index: 1;
+        }
+
+        /* GALERÍA */
+        .galeria-wrap {
+            max-width: 1100px; margin: 0 auto;
+            padding: 3rem 5% 2rem;
+        }
+        .galeria-top {
+            display: flex; align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.8rem;
+        }
+        .galeria-top h2 { font-size: 1rem; font-weight: 700; color: #2f3542; }
+        .galeria-badge {
+            font-size: 0.68rem; font-weight: 700;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: #ff6b81; background: #fde8ef;
+            padding: 4px 12px; border-radius: 50px;
+        }
+
+        /* Grid 3 columnas */
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .foto-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+            border: 1.5px solid #f5f0f0;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            text-align: center;
+        }
+        .foto-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(255,107,129,0.15);
+            border-color: #f8a5c2;
+        }
+        .foto-item-img {
+            width: 100%; aspect-ratio: 4/3;
+            overflow: hidden; background: #fff5f7;
+        }
+        .foto-item-img img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform 0.5s ease;
+        }
+        .foto-item:hover .foto-item-img img { transform: scale(1.06); }
+        .foto-item p {
+            padding: 12px 14px 16px;
+            font-size: 0.88rem; color: #666;
+            font-weight: 400; line-height: 1.5;
+        }
+
+        /* BANNER CTA */
+        .cta-banner {
+            background: linear-gradient(135deg, #ff6b81 0%, #c44560 100%);
+            margin: 1rem 5% 3rem;
+            max-width: 1100px;
+            margin-left: auto; margin-right: auto;
+            border-radius: 24px;
+            padding: 3rem 3rem;
+            text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .cta-banner::before {
+            content: '';
+            position: absolute; top: -60px; right: -50px;
+            width: 240px; height: 240px; border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+        }
+        .cta-banner h2 {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 700; color: white;
+            margin-bottom: 8px; position: relative; z-index: 1;
+        }
+        .cta-banner p {
+            font-size: 0.88rem; color: rgba(255,255,255,0.75);
+            font-weight: 300; margin-bottom: 1.6rem;
+            position: relative; z-index: 1;
+        }
+        .btn-cta {
+            display: inline-block;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white; padding: 14px 30px;
+            border-radius: 50px; text-decoration: none;
+            font-weight: 700; font-size: 0.9rem;
+            box-shadow: 0 6px 20px rgba(37,211,102,0.35);
+            transition: transform 0.25s, box-shadow 0.25s;
+            position: relative; z-index: 1;
+        }
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(37,211,102,0.45);
+        }
+
+        /* VOLVER */
+        .volver-wrap {
+            text-align: center; padding: 0 5% 3rem;
+        }
+        .btn-volver {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 0.78rem; font-weight: 600;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: #bbb; text-decoration: none;
+            transition: color 0.2s;
+        }
+        .btn-volver:hover { color: #ff6b81; }
+
+        /* FOOTER */
+        footer {
+            background: #2f3542;
+            color: rgba(255,255,255,0.4);
+            display: flex; align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 5%;
+            font-size: 0.75rem; flex-wrap: wrap; gap: 0.8rem;
+        }
+        .footer-logo {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.1rem; color: rgba(255,255,255,0.75);
+        }
+
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .galeria-grid { grid-template-columns: repeat(2, 1fr); }
+            .cta-banner { margin: 1rem 1.5rem 3rem; padding: 2rem 1.5rem; }
+        }
+        @media (max-width: 520px) {
+            .galeria-grid { grid-template-columns: 1fr; }
+            footer { flex-direction: column; text-align: center; }
+        }
+    </style>
 </head>
 <body>
+
     <nav>
-        <a href="index.html" class="logo" style="text-decoration: none;">Marba</a>
+        <a href="index.html" class="logo">Marba</a>
+        <ul class="nav-links">
+            <li><a href="papeleria.html" class="active">Papelería</a></li>
+            <li><a href="estampados.html">Estampados</a></li>
+            <li><a href="regalos.html">Regalos</a></li>
+            <li><a href="https://wa.me/56946208955" class="nav-wa" target="_blank">💬 Cotizar</a></li>
+        </ul>
     </nav>
 
-    <main class="container">
-        <h1 class="section-title">Papelería</h1>
-        <p style="text-align: center; margin-bottom: 30px;">Productos de papelería personalizados para tu negocio o personales.</p>
-        
-        <div class="galeria-real">
+    <div class="page-hero">
+        <div class="breadcrumb"><a href="index.html">Inicio</a> › Papelería</div>
+        <h1>Papelería <span>Personalizada</span></h1>
+        <p>Productos de papelería personalizados para tu negocio o personales.</p>
+    </div>
+
+    <div class="galeria-wrap">
+        <div class="galeria-top">
+            <h2>Todos los productos</h2>
+            <span class="galeria-badge">6 productos</span>
+        </div>
+
+        <div class="galeria-grid">
 
             <div class="foto-item">
-                <img src="tu-foto-1.jpg" alt="Producto Marba">
+                <div class="foto-item-img"><img src="tu-foto-1.jpg" alt="Producto Marba"></div>
                 <p>Descripción 1</p>
             </div>
 
             <div class="foto-item">
-                <img src="tu-foto-2.jpg" alt="Producto Marba">
+                <div class="foto-item-img"><img src="tu-foto-2.jpg" alt="Producto Marba"></div>
                 <p>Descripción 2</p>
             </div>
 
-            <!-- ➕ FOTO EXTRA 1: cambia src por el nombre de tu imagen -->
             <div class="foto-item">
-                <img src="tu-foto-3.jpg" alt="Producto Marba">
+                <div class="foto-item-img"><img src="tu-foto-3.jpg" alt="Producto Marba"></div>
                 <p>Descripción 3</p>
             </div>
 
-            <!-- ➕ FOTO EXTRA 2: cambia src por el nombre de tu imagen -->
             <div class="foto-item">
-                <img src="tu-foto-4.jpg" alt="Producto Marba">
+                <div class="foto-item-img"><img src="tu-foto-4.jpg" alt="Producto Marba"></div>
                 <p>Descripción 4</p>
             </div>
 
-        </div>
+            <div class="foto-item">
+                <div class="foto-item-img"><img src="tu-foto-5.jpg" alt="Producto Marba"></div>
+                <p>Descripción 5</p>
+            </div>
 
-        <div style="text-align: center; margin-top: 50px;">
-            <a href="index.html" class="btn-cta">← Volver al Inicio</a>
+            <div class="foto-item">
+                <div class="foto-item-img"><img src="tu-foto-6.jpg" alt="Producto Marba"></div>
+                <p>Descripción 6</p>
+            </div>
+
+            <!-- PARA AGREGAR MAS: copia el bloque de arriba y cambia el src y la descripcion -->
+
         </div>
-    </main>
+    </div>
+
+    <div class="cta-banner">
+        <h2>¿Te gustó algo? ¡Escríbenos! 📓</h2>
+        <p>Cotiza rápido · Envíos a todo Chile</p>
+        <a href="https://wa.me/56946208955" class="btn-cta" target="_blank">💬 Cotizar por WhatsApp</a>
+    </div>
+
+    <div class="volver-wrap">
+        <a href="index.html" class="btn-volver">← Volver al Inicio</a>
+    </div>
 
     <footer>
-        <p>&copy; 2026 Marba Papelería & Estampados | Santiago, Chile</p>
+        <span class="footer-logo">Marba</span>
+        <span>© 2026 Marba Papelería & Estampados · Santiago, Chile</span>
+        <span>Hecho con ♥ desde Coquimbo</span>
     </footer>
+
 </body>
 </html>
