@@ -4,37 +4,374 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sección | Marba</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <title>Regalos | Marba</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* ── Estilos extra solo para las páginas internas ── */
+
+        .page-header {
+            background: linear-gradient(135deg, #FDE8EF 0%, #fcfcfc 100%);
+            padding: 120px 5% 50px;
+            text-align: center;
+            border-bottom: 1px solid #f0e0e5;
+        }
+
+        .page-header .breadcrumb {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 1rem;
+        }
+
+        .page-header .breadcrumb a {
+            color: #ff6b81;
+            text-decoration: none;
+        }
+
+        .page-header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: #2f3542;
+            margin-bottom: 0.6rem;
+        }
+
+        .page-header h1 span { color: #ff6b81; }
+
+        .page-header p {
+            font-size: 1rem;
+            color: #888;
+            font-weight: 300;
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ── Galería ── */
+        .galeria-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3.5rem 5% 2rem;
+        }
+
+        .galeria-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .galeria-top h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2f3542;
+        }
+
+        .galeria-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #888;
+            background: #f0f0f0;
+            padding: 0.3rem 0.9rem;
+            border-radius: 50px;
+        }
+
+        /* Grid de fotos: 3 col desktop, 2 tablet, 1 móvil */
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .foto-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+            border: 1.5px solid #f5f0f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .foto-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(255,107,129,0.15);
+            border-color: #f8a5c2;
+        }
+
+        .foto-card-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background: #fef5f7;
+        }
+
+        .foto-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .foto-card:hover .foto-card-img img {
+            transform: scale(1.07);
+        }
+
+        .foto-card-body {
+            padding: 1rem 1.2rem 1.4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            flex: 1;
+        }
+
+        .foto-card-tag {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #ff6b81;
+            background: #FDE8EF;
+            padding: 0.22rem 0.6rem;
+            border-radius: 50px;
+            width: fit-content;
+        }
+
+        .foto-card-nombre {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #2f3542;
+        }
+
+        .foto-card-desc {
+            font-size: 0.82rem;
+            color: #888;
+            font-weight: 300;
+            line-height: 1.55;
+            flex: 1;
+        }
+
+        .foto-card-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #ff6b81;
+            text-decoration: none;
+            margin-top: 0.6rem;
+            transition: gap 0.2s;
+        }
+
+        .foto-card:hover .foto-card-btn { gap: 0.7rem; }
+
+        /* ── Banner CTA ── */
+        .cta-banner {
+            background: linear-gradient(135deg, #ff6b81 0%, #c44560 100%);
+            border-radius: 24px;
+            padding: 3.5rem 3rem;
+            text-align: center;
+            margin: 2rem 5% 4rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -50px;
+            width: 250px; height: 250px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.07);
+        }
+
+        .cta-banner h2 {
+            font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.6rem;
+            position: relative; z-index: 1;
+        }
+
+        .cta-banner p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.75);
+            font-weight: 300;
+            margin-bottom: 1.8rem;
+            position: relative; z-index: 1;
+        }
+
+        .cta-banner .btn-cta {
+            position: relative; z-index: 1;
+        }
+
+        /* ── Volver ── */
+        .volver-wrap {
+            text-align: center;
+            padding: 1rem 5% 4rem;
+        }
+
+        .btn-volver {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .btn-volver:hover { color: #ff6b81; }
+
+        @media (max-width: 900px) {
+            .galeria-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 520px) {
+            .galeria-grid { grid-template-columns: 1fr; }
+            .cta-banner { padding: 2.5rem 1.5rem; margin: 1.5rem; }
+        }
+    </style>
 </head>
 <body>
+
     <nav>
-        <a href="index.html" class="logo" style="text-decoration: none;">Marba</a>
+        <a href="index.html" class="logo" style="text-decoration:none;">Marba</a>
     </nav>
 
-    <main class="container">
-        <h1 class="section-title">Regalos y Detalles</h1>
-        <p style="text-align: center; margin-bottom: 30px;">Regalos personalizados para ocasiones especiales.</p>
-        
-        <div class="galeria-real">
-            <div class="foto-item">
-                <img src="tu-foto-5.jpg" alt="Producto Marba">
-                <p>Descripción 1</p>
-            </div>
-            <div class="foto-item">
-                <img src="tu-foto-6.jpg" alt="Producto Marba">
-                <p>Descripción 2</p>
-            </div>
+    <!-- ENCABEZADO -->
+    <div class="page-header">
+        <div class="breadcrumb"><a href="index.html">Inicio</a> › Regalos</div>
+        <h1>Regalos <span>&amp; Detalles</span></h1>
+        <p>Cajas y detalles personalizados para cumpleaños, matrimonios, baby showers y más.</p>
+    </div>
+
+    <!-- GALERÍA -->
+    <div class="galeria-wrap">
+        <div class="galeria-top">
+            <h2>Todos los productos</h2>
+            <!-- ✏️ Cambia el número según cuántas fotos tengas -->
+            <span class="galeria-badge">6 productos</span>
         </div>
 
-        <div style="text-align: center; margin-top: 50px;">
-            <a href="index.html" class="btn-cta">← Volver al Inicio</a>
+        <!--
+        ═══════════════════════════════════════════
+        💡 CÓMO AGREGAR MÁS FOTOS:
+           Copia un bloque .foto-card completo
+           y pégalo aquí dentro del .galeria-grid.
+           Cambia:  src="nombre-foto.jpg"
+                    el nombre y la descripción
+        ═══════════════════════════════════════════
+        -->
+        <div class="galeria-grid">
+
+            <div class="foto-card">
+                <div class="foto-card-img">
+                    <img src="tu-foto-1.jpg" alt="Producto Marba">
+                </div>
+                <div class="foto-card-body">
+                    <span class="foto-card-tag">Regalos</span>
+                    <p class="foto-card-nombre">Nombre del producto</p>
+                    <p class="foto-card-desc">Descripción breve: materiales, tamaños, colores disponibles.</p>
+                    <a href="https://wa.me/56946208955" class="foto-card-btn" target="_blank">Cotizar →</a>
+                </div>
+            </div>
+
+            <div class="foto-card">
+                <div class="foto-card-img">
+                    <img src="tu-foto-2.jpg" alt="Producto Marba">
+                </div>
+                <div class="foto-card-body">
+                    <span class="foto-card-tag">Regalos</span>
+                    <p class="foto-card-nombre">Nombre del producto</p>
+                    <p class="foto-card-desc">Descripción breve: materiales, tamaños, colores disponibles.</p>
+                    <a href="https://wa.me/56946208955" class="foto-card-btn" target="_blank">Cotizar →</a>
+                </div>
+            </div>
+
+            <div class="foto-card">
+                <div class="foto-card-img">
+                    <img src="tu-foto-3.jpg" alt="Producto Marba">
+                </div>
+                <div class="foto-card-body">
+                    <span class="foto-card-tag">Regalos</span>
+                    <p class="foto-card-nombre">Nombre del producto</p>
+                    <p class="foto-card-desc">Descripción breve: materiales, tamaños, colores disponibles.</p>
+                    <a href="https://wa.me/56946208955" class="foto-card-btn" target="_blank">Cotizar →</a>
+                </div>
+            </div>
+
+            <div class="foto-card">
+                <div class="foto-card-img">
+                    <img src="tu-foto-4.jpg" alt="Producto Marba">
+                </div>
+                <div class="foto-card-body">
+                    <span class="foto-card-tag">Regalos</span>
+                    <p class="foto-card-nombre">Nombre del producto</p>
+                    <p class="foto-card-desc">Descripción breve: materiales, tamaños, colores disponibles.</p>
+                    <a href="https://wa.me/56946208955" class="foto-card-btn" target="_blank">Cotizar →</a>
+                </div>
+            </div>
+
+            <div class="foto-card">
+                <div class="foto-card-img">
+                    <img src="tu-foto-5.jpg" alt="Producto Marba">
+                </div>
+                <div class="foto-card-body">
+                    <span class="foto-card-tag">Regalos</span>
+                    <p class="foto-card-nombre">Nombre del producto</p>
+                    <p class="foto-card-desc">Descripción breve: materiales, tamaños, colores disponibles.</p>
+                    <a href="https://wa.me/56946208955" class="foto-card-btn" target="_blank">Cotizar →</a>
+                </div>
+            </div>
+
+            <div class="foto-card">
+                <div class="foto-card-img">
+                    <img src="tu-foto-6.jpg" alt="Producto Marba">
+                </div>
+                <div class="foto-card-body">
+                    <span class="foto-card-tag">Regalos</span>
+                    <p class="foto-card-nombre">Nombre del producto</p>
+                    <p class="foto-card-desc">Descripción breve: materiales, tamaños, colores disponibles.</p>
+                    <a href="https://wa.me/56946208955" class="foto-card-btn" target="_blank">Cotizar →</a>
+                </div>
+            </div>
+
+            <!-- ➕ AGREGA MÁS PRODUCTOS AQUÍ -->
+
         </div>
-    </main>
+    </div>
+
+    <!-- BANNER CTA -->
+    <div class="cta-banner">
+        <h2>¿Te gustó algo? ¡Escríbenos! 🎁</h2>
+        <p>Cotiza rápido por WhatsApp · Envíos a todo Chile</p>
+        <a href="https://wa.me/56946208955" class="btn-cta" target="_blank">💬 Cotizar por WhatsApp</a>
+    </div>
+
+    <div class="volver-wrap">
+        <a href="index.html" class="btn-volver">← Volver al inicio</a>
+    </div>
 
     <footer>
-        <p>&copy; 2026 Marba Papelería & Estampados | Santiago, Chile</p>
+        <p>&copy; 2026 Marba Papelería &amp; Estampados | Santiago, Chile</p>
     </footer>
+
 </body>
 </html>
